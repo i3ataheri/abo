@@ -63,12 +63,12 @@ main {
 
 /* =========================HERO========================= */
 .hero {
-    min-height: 600px;
+    min-height: 540px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 50px 25px;
+    padding: 16px 25px 40px;
     border-radius: 40px;
     background: rgba(255,255,255,.75);
     backdrop-filter: blur(15px);
@@ -93,7 +93,7 @@ main {
 
 .badge {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 0;
     padding: 9px 22px;
     border-radius: 50px;
     background: #dff8ee;
@@ -104,7 +104,7 @@ main {
 
 /* حركة انسيابية مستمرة لعنوان يوم المعلم */
 h1 {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: clamp(45px, 9vw, 85px);
     line-height: 1.1;
     color: #087f5b;
@@ -493,7 +493,7 @@ footer {
 /* =========================موبایل========================= */
 @media(max-width: 800px) {
     main { width: 94%; }
-    .hero { min-height: 520px; border-radius: 30px; }
+    .hero { min-height: 480px; padding: 14px 18px 35px; border-radius: 30px; }
     .teachers { grid-template-columns: 1fr; }
     .teacher { padding: 25px; }
     .message { padding: 35px 20px; }
