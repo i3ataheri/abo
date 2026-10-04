@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>يوم المعلم السعودي 🇸🇦</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Cairo", sans-serif;
+    min-height: 100vh;
+    color: #17352d;
+    overflow-x: hidden;
+    background: radial-gradient(circle at 10% 15%, #ffe9a8 0%, transparent 20%),
+                radial-gradient(circle at 90% 20%, #c9f2e1 0%, transparent 25%),
+                linear-gradient(135deg, #f8fffc, #fffaf0, #e9faf3);
+}
+
+/* =========================الخلفية المتحركة========================= */
+.background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: .35;
+    animation: float 7s ease-in-out infinite;
+}
+.circle.one { width: 180px; height: 180px; background: #bcebd9; top: 5%; right: -60px; }
+.circle.two { width: 130px; height: 130px; background: #ffe39a; bottom: 10%; left: -40px; animation-delay: 2s; }
+.circle.three { width: 80px; height: 80px; background: #9edec8; top: 50%; left: 10%; animation-delay: 4s; }
+
+.star {
+    position: absolute;
+    color: #d7a52c;
+    font-size: 25px;
+    animation: sparkle 2s infinite;
+}
+.star:nth-child(4) { top: 15%; left: 15%; }
+.star:nth-child(5) { top: 35%; right: 15%; animation-delay: .5s; }
+.star:nth-child(6) { bottom: 20%; left: 20%; animation-delay: 1s; }
+.star:nth-child(7) { bottom: 12%; right: 25%; animation-delay: 1.5s; }
+
+main {
+    position: relative;
+    z-index: 2;
+    width: min(1100px, 92%);
+    margin: auto;
+    padding: 35px 0 60px;
+}
+
+/* =========================HERO========================= */
+.hero {
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 25px;
+    border-radius: 40px;
+    background: rgba(255,255,255,.75);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(8,127,91,.12);
+    box-shadow: 0 25px 70px rgba(7,84,63,.13);
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(8,127,91,.08);
+    animation: rotate 25s linear infinite;
+}
+.hero-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+}
+
+.badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 9px 22px;
+    border-radius: 50px;
+    background: #dff8ee;
+    color: #07543f;
+    font-weight: 800;
+    animation: slideDown 1s both;
+}
+
+/* حركة انسيابية مستمرة لعنوان يوم المعلم */
+h1 {
+    margin-top: 20px;
+    font-size: clamp(45px, 9vw, 85px);
+    line-height: 1.1;
+    color: #087f5b;
+    font-weight: 900;
+    text-shadow: 0 5px 0 rgba(245,196,81,.35);
+    animation: smoothFloat 4s ease-in-out infinite;
+}
+
+.subtitle {
+    margin-top: 15px;
+    font-size: clamp(20px, 4vw, 32px);
+    font-weight: 800;
+    color: #07543f;
+    animation: fadeUp 1s .4s both;
+}
+
+.description {
+    max-width: 750px;
+    margin: 20px auto;
+    line-height: 2.1;
+    color: #58716a;
+    font-size: 18px;
+    animation: fadeUp 1s .6s both;
+}
+
+/* =========================بطاقة الطالب========================= */
+.student-card {
+    width: min(650px, 100%);
+    margin: 35px auto 0;
+    padding: 25px;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(135deg,#087f5b,#0a9b70);
+    box-shadow: 0 20px 50px rgba(8,127,91,.25);
+    animation: fadeUp 1s .8s both;
+    position: relative;
+    overflow: hidden;
+}
+.student-card::before {
+    content: "✦";
+    position: absolute;
+    left: 25px; top: 10px;
+    font-size: 40px;
+    color: #ffe39a;
+    animation: sparkle 2s infinite;
+}
+.student-label { opacity: .8; font-size: 14px; }
+.student-name { font-size: 30px; font-weight: 900; margin-top: 5px; }
+.class-name { margin-top: 4px; color: #e7fff5; }
+
+/* =========================عنوان القسم========================= */
+.section-title {
+    text-align: center;
+    margin: 75px 0 30px;
+}
+.section-title h2 {
+    font-size: 35px;
+    color: #07543f;
+    font-weight: 900;
+}
+.section-title p {
+    margin-top: 5px;
+    color: #789089;
+}
+
+/* =========================المعلمين========================= */
+.teachers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.teacher {
+    padding: 28px 20px;
+    text-align: center;
+    border-radius: 30px;
+    background: rgba(255,255,255,.85);
+    border: 1px solid rgba(8,127,91,.10);
+    box-shadow: 0 15px 35px rgba(7,84,63,.09);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* تفاعل مميز عند تمرير الماوس أو النقر */
+.teacher:hover, .teacher.active-touch {
+    transform: translateY(-12px) scale(1.03);
+    background: linear-gradient(145deg, #ffffff, #f0fbf7);
+    border-color: #087f5b;
+    box-shadow: 0 30px 60px rgba(8, 127, 91, 0.22);
+}
+
+.teacher::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: #087f5b;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.teacher:hover::after, .teacher.active-touch::after {
+    transform: scaleX(1);
+}
+
+/* تحويل الأيقونات إلى الحرف الأول من الاسم بتصميم جذاب */
+.avatar {
+    width: 85px; height: 85px;
+    margin: auto;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 38px;
+    font-weight: 900;
+    color: #087f5b;
+    border-radius: 25px;
+    background: linear-gradient(145deg,#fff7d9,#ffffff);
+    box-shadow: 0 10px 25px rgba(245,196,81,.25);
+    border: 2px solid rgba(245,196,81,.4);
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.teacher:hover .avatar, .teacher.active-touch .avatar {
+    background: linear-gradient(145deg, #087f5b, #0a9b70);
+    color: #ffffff;
+    transform: rotate(8deg) scale(1.1);
+    box-shadow: 0 15px 30px rgba(8,127,91,.3);
+}
+
+.teacher h3 {
+    margin-top: 15px;
+    color: #07543f;
+    font-size: 22px;
+    transition: color 0.3s ease;
+}
+
+.teacher:hover h3, .teacher.active-touch h3 {
+    color: #054232;
+}
+
+.teacher span {
+    color: #81918c;
+    font-size: 14px;
+}
+
+/* =========================الرسالة========================= */
+.message {
+    margin-top: 55px;
+    padding: 45px 30px;
+    text-align: center;
+    border-radius: 35px;
+    color: white;
+    background: linear-gradient(135deg,#087f5b,#065b45);
+    box-shadow: 0 25px 60px rgba(7,84,63,.25);
+    position: relative;
+    overflow: hidden;
+}
+.message h2 { font-size: 34px; margin-bottom: 15px; }
+.message p {
+    max-width: 800px;
+    margin: auto;
+    line-height: 2.2;
+    font-size: 18px;
+    color: #ecfff8;
+}
+.signature {
+    margin-top: 25px;
+    font-size: 21px;
+    font-weight: 900;
+    color: #ffe39a;
+}
+.heart {
+    display: inline-block;
+    animation: heartbeat 1.4s infinite;
+}
+
+/* =========================FOOTER========================= */
+footer {
+    text-align: center;
+    padding: 35px 10px 0;
+    color: #789089;
+    font-size: 15px;
+    line-height: 1.8;
+}
+.footer-author-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+.footer-author {
+    font-size: 16px;
+    font-weight: 800;
+    color: #087f5b;
+}
+.whatsapp-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: #25d366;
+    color: #ffffff;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.whatsapp-icon:hover {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+}
+
+/* =========================Confetti========================= */
+.confetti {
+    position: fixed;
+    top: -30px;
+    z-index: 100;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+/* =========================ANIMATIONS========================= */
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
+}
+
+@keyframes smoothFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkle {
+    0%,100% { opacity: .3; transform: scale(.8) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.3) rotate(20deg); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* =========================موبایل========================= */
+@media(max-width: 800px) {
+    main { width: 94%; }
+    .hero { min-height: 520px; border-radius: 30px; }
+    .teachers { grid-template-columns: 1fr; }
+    .teacher { padding: 25px; }
+    .message { padding: 35px 20px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+</style>
+</head>
+<body>
+<!-- الخلفية -->
+<div class="background">
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+    <div class="circle three"></div>
+    <div class="star">✦</div>
+    <div class="star">✧</div>
+    <div class="star">★</div>
+    <div class="star">✦</div>
+</div>
+
+<main>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🇸🇦 مناسبة سعيدة</div>
+            <!-- العنوان المتحرك بانسيابية مستمرة -->
+            <h1>يوم المعلم</h1>
+            <div class="subtitle">كل عام وأنتم بخير يا معلمينا</div>
+            <p class="description">
+                إلى من علّمنا الحروف والكلمات، وفتح لنا أبواب العلم والأمل...
+                <br>
+                شكراً لكم على عطائكم وصبركم ومحبتكم. أنتم أبطال قصتنا التعليمية 💚
+            </p>
+
+            <!-- اسم الطالب -->
+            <div class="student-card">
+                <div class="student-label">إهداء من الطالب</div>
+                <div class="student-name">أبوبكر عبدالله بلوشي</div>
+                <div class="class-name">الصف الرابع الابتدائي أ • مدرسة العريض الابتدائية</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TEACHERS ================= -->
+    <section>
+        <div class="section-title">
+            <h2>🌷 إلى معلمينا الرائعين</h2>
+            <p>شكراً لكل معلم ومعلمة تركوا أثراً جميلاً في حياتنا</p>
+        </div>
+
+        <div class="teachers">
+            <!-- المعلم 1 -->
+            <article class="teacher" onclick="toggleCard(this)">
+                <div class="avatar">س</div>
+                <h3>الأستاذة سارة</h3>
+                <span>معلمة اللغة العربية</span>
+            </article>
+
+            <!-- المعلم 2 -->
+            <article class="teacher" onclick="toggleCard(this)">
+                <div class="avatar">خ</div>
+                <h3>الأستاذ خالد</h3>
+                <span>معلم الرياضيات</span>
+            </article>
+
+            <!-- المعلم 3 -->
+            <article class="teacher" onclick="toggleCard(this)">
+                <div class="avatar">ن</div>
+                <h3>الأستاذة نورة</h3>
+                <span>معلمة العلوم</span>
+            </article>
+
+            <!-- المعلم 4 -->
+            <article class="teacher" onclick="toggleCard(this)">
+                <div class="avatar">ع</div>
+                <h3>الأستاذ عبدالله</h3>
+                <span>معلم التربية الإسلامية</span>
+            </article>
+
+            <!-- المعلم 5 -->
+            <article class="teacher" onclick="toggleCard(this)">
+                <div class="avatar">ر</div>
+                <h3>الأستاذة ريم</h3>
+                <span>معلمة اللغة الإنجليزية</span>
+            </article>
+
+            <!-- المعلم 6 -->
+            <article class="teacher" onclick="toggleCard(this)">
+                <div class="avatar">ف</div>
+                <h3>الأستاذ فهد</h3>
+                <span>معلم المهارات الرقمية</span>
+            </article>
+        </div>
+    </section>
+
+    <!-- ================= MESSAGE ================= -->
+    <section class="message">
+        <h2>💚 رسالة من القلب</h2>
+        <p>
+            معلمينا الأعزاء،
+            أنتم النور الذي يضيء طريقنا، وبكم نتعلم ونكبر ونحقق أحلامنا.
+            <br><br>
+            نسأل الله أن يبارك في جهودكم، ويجزيكم عنا خير الجزاء، ويجعل كل حرف علمتمونا إياه صدقةً جاريةً لكم.
+        </p>
+        <div class="signature">
+            شكراً لكم من القلب
+            <span class="heart">❤️️</span>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        صُمم بكل حب بمناسبة يوم المعلم السعودي 🇸🇦
+        <br>
+        <div class="footer-author-container">
+            <span class="footer-author">برمجة وتصميم: والد الطالب</span>
+            <a href="https://wa.me/966548471318" target="_blank" class="whatsapp-icon" title="تواصل عبر واتساب">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    </footer>
+</main>
+
+<script>
+const symbols = ["✦","✧","★","•","✿"];
+function createConfetti() {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.fontSize = (10 + Math.random() * 15) + "px";
+    confetti.style.animationDuration = (4 + Math.random() * 5) + "s";
+    confetti.style.color = Math.random() > .5 ? "#087f5b" : "#d5a62d";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 9000);
+}
+
+// توليد مداوم ستاره و کاغذ رنگی
+setInterval(createConfetti, 450);
+
+// انفجار کوچک هنگام باز شدن صفحه
+window.addEventListener("load", () => {
+    for(let i = 0; i < 20; i++) {
+        setTimeout(createConfetti, i * 80);
+    }
+});
+
+// تفاعل النقر في الموبايل أو الشاشات اللمسية للكروت
+function toggleCard(element) {
+    document.querySelectorAll('.teacher').forEach(card => {
+        if (card !== element) card.classList.remove('active-touch');
+    });
+    element.classList.toggle('active-touch');
+}
+</script>
+</body>
+</html>
