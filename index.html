@@ -151,9 +151,50 @@ h1 {
     color: #ffe39a;
     animation: sparkle 2s infinite;
 }
-.student-label { opacity: .8; font-size: 12px; }
-.student-name { font-size: 20px; font-weight: 900; margin-top: 5px; }
-.class-name { margin-top: 4px; color: #e7fff5; }
+.student-label { opacity: .8; font-size: 14px; }
+.student-name { font-size: 30px; font-weight: 900; margin-top: 5px; }
+.class-name { margin-top: 4px; color: #e7fff5; font-size: 19px; }
+
+/* =========================تلميح التمرير للأسفل========================= */
+.scroll-hint {
+    margin-top: 30px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #07543f;
+    font-size: 15px;
+    font-weight: 800;
+    opacity: .95;
+    transition: opacity .45s ease, transform .45s ease;
+}
+.scroll-hint.gone {
+    opacity: 0;
+    transform: translateY(25px);
+    pointer-events: none;
+}
+.scroll-arrow {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #ffffff;
+    background: linear-gradient(145deg, #087f5b, #0a9b70);
+    box-shadow: 0 12px 26px rgba(8,127,91,.3);
+    animation: arrowBounce 1.7s ease-in-out infinite;
+}
+.scroll-arrow::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid rgba(8,127,91,.35);
+    animation: ringPulse 1.7s ease-out infinite;
+}
 
 /* =========================عنوان القسم========================= */
 .section-title {
@@ -432,6 +473,16 @@ footer {
     50% { box-shadow: 0 18px 42px rgba(8,127,91,.45); }
 }
 
+@keyframes arrowBounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+@keyframes ringPulse {
+    0% { transform: scale(.85); opacity: .9; }
+    100% { transform: scale(1.35); opacity: 0; }
+}
+
 @keyframes fall {
     to {
         transform: translateY(110vh) rotate(720deg);
@@ -484,6 +535,12 @@ footer {
                 <div class="student-label">إهداء من الطالب</div>
                 <div class="student-name">أبوبكر عبدالله بلوشي</div>
                 <div class="class-name">الصف الرابع الابتدائي أ • مدرسة العريض الابتدائية</div>
+            </div>
+
+            <!-- تلميح التمرير للأسفل -->
+            <div class="scroll-hint" id="scrollHint">
+                <span class="scroll-label">مرّر للأسفل لاكتشاف أساتذتي</span>
+                <span class="scroll-arrow"><i class="fa-solid fa-angle-down"></i></span>
             </div>
         </div>
     </section>
@@ -621,6 +678,12 @@ window.addEventListener("load", () => {
         setTimeout(createConfetti, i * 80);
     }
 });
+
+// ============ إخفاء تلميح التمرير عند بدء التمرير ============
+const scrollHint = document.getElementById('scrollHint');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 120) scrollHint.classList.add('gone');
+}, { passive: true });
 
 // ============ دعاء يظهر داخل كرت الأستاذ ويختفي تلقائياً ============
 const cards = document.querySelectorAll('.teacher');
