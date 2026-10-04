@@ -178,7 +178,12 @@ h1 {
 }
 .teacher {
     padding: 28px 20px;
+    min-height: 250px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-radius: 30px;
     background: rgba(255,255,255,.85);
     border: 1px solid rgba(8,127,91,.10);
@@ -190,7 +195,7 @@ h1 {
 }
 
 /* تفاعل مميز عند تمرير الماوس أو النقر */
-.teacher:hover, .teacher.active-touch {
+.teacher:hover, .teacher.show-dua {
     transform: translateY(-12px) scale(1.03);
     background: linear-gradient(145deg, #ffffff, #f0fbf7);
     border-color: #087f5b;
@@ -207,14 +212,14 @@ h1 {
     transition: transform 0.3s ease;
 }
 
-.teacher:hover::after, .teacher.active-touch::after {
+.teacher:hover::after, .teacher.show-dua::after {
     transform: scaleX(1);
 }
 
 /* تحويل الأيقونات إلى الحرف الأول من الاسم بتصميم جذاب */
 .avatar {
     width: 85px; height: 85px;
-    margin: auto;
+    margin: 0 auto;
     display: flex; justify-content: center; align-items: center;
     font-size: 38px;
     font-weight: 900;
@@ -226,7 +231,7 @@ h1 {
     transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 
-.teacher:hover .avatar, .teacher.active-touch .avatar {
+.teacher:hover .avatar, .teacher.show-dua .avatar {
     background: linear-gradient(145deg, #087f5b, #0a9b70);
     color: #ffffff;
     transform: rotate(8deg) scale(1.1);
@@ -237,16 +242,73 @@ h1 {
     margin-top: 15px;
     color: #07543f;
     font-size: 22px;
-    transition: color 0.3s ease;
+    transition: color .3s ease, opacity .3s ease;
 }
 
-.teacher:hover h3, .teacher.active-touch h3 {
+.teacher:hover h3, .teacher.show-dua h3 {
     color: #054232;
 }
 
 .teacher span {
     color: #81918c;
     font-size: 14px;
+    transition: opacity .3s ease;
+}
+
+.teacher.show-dua h3, .teacher.show-dua span {
+    opacity: 0;
+}
+
+/* =========================دعاء يظهر داخل كرت الأستاذ========================= */
+.dua {
+    position: absolute;
+    top: 118px;
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.85;
+    color: #ffffff;
+    background: linear-gradient(145deg, #087f5b, #0a9b70);
+    box-shadow: 0 15px 30px rgba(8,127,91,.28);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(22px) scale(.85);
+    transition: opacity .35s ease, transform .5s cubic-bezier(.175,.885,.32,1.275), visibility .35s;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.dua::after {
+    content: "\f005";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    font-size: 13px;
+    color: #ffe39a;
+    opacity: 0;
+    transition: opacity .3s ease .1s;
+}
+
+.teacher.show-dua .dua {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    animation: duaPulse 2.4s ease-in-out infinite;
+}
+
+.teacher.show-dua .dua::after {
+    opacity: 1;
+    animation: sparkle 1.6s infinite;
 }
 
 /* =========================الرسالة========================= */
@@ -365,6 +427,11 @@ footer {
     30% { transform: scale(1); }
 }
 
+@keyframes duaPulse {
+    0%,100% { box-shadow: 0 15px 30px rgba(8,127,91,.28); }
+    50% { box-shadow: 0 18px 42px rgba(8,127,91,.45); }
+}
+
 @keyframes fall {
     to {
         transform: translateY(110vh) rotate(720deg);
@@ -429,46 +496,76 @@ footer {
         </div>
 
         <div class="teachers">
+            <!-- وكيل المدرسة -->
+            <article class="teacher">
+                <div class="avatar">ح</div>
+                <h3>الأستاذ حسين</h3>
+                <span>وكيل المدرسة</span>
+                <div class="dua">اللهم اجعل سيرته في مدرستنا قدوةً في الخير</div>
+            </article>
+
             <!-- المعلم 1 -->
-            <article class="teacher" onclick="toggleCard(this)">
-                <div class="avatar">س</div>
-                <h3>الأستاذة سارة</h3>
-                <span>معلمة اللغة العربية</span>
+            <article class="teacher">
+                <div class="avatar">إ</div>
+                <h3>الأستاذ إبراهيم الصاعدي</h3>
+                <span>أستاذ لغتي</span>
+                <div class="dua">اللهم اجعل كلامه نوراً في قلوبنا وعلمه باباً لطلبة العلم</div>
             </article>
 
             <!-- المعلم 2 -->
-            <article class="teacher" onclick="toggleCard(this)">
-                <div class="avatar">خ</div>
-                <h3>الأستاذ خالد</h3>
-                <span>معلم الرياضيات</span>
+            <article class="teacher">
+                <div class="avatar">ع</div>
+                <h3>الأستاذ عبدالله العوفي</h3>
+                <span>أستاذ الرقمية والدراسات الاجتماعية</span>
+                <div class="dua">اللهم ارزقنا من فضلك علماً نافعاً وعملاً متقناً</div>
             </article>
 
             <!-- المعلم 3 -->
-            <article class="teacher" onclick="toggleCard(this)">
-                <div class="avatar">ن</div>
-                <h3>الأستاذة نورة</h3>
-                <span>معلمة العلوم</span>
+            <article class="teacher">
+                <div class="avatar">ي</div>
+                <h3>الأستاذ ياسر السهلي</h3>
+                <span>أستاذ الإسلامية</span>
+                <div class="dua">اللهم اجعل كتابه شفاءً لقلوبنا ونوراً لسطورنا</div>
             </article>
 
             <!-- المعلم 4 -->
-            <article class="teacher" onclick="toggleCard(this)">
-                <div class="avatar">ع</div>
-                <h3>الأستاذ عبدالله</h3>
-                <span>معلم التربية الإسلامية</span>
+            <article class="teacher">
+                <div class="avatar">ف</div>
+                <h3>الأستاذ فهد الرحيلي</h3>
+                <span>أستاذ بدنية</span>
+                <div class="dua">اللهم احفظه من كل سقام وأعطه صحةً وعافيةً وقوة</div>
             </article>
 
             <!-- المعلم 5 -->
-            <article class="teacher" onclick="toggleCard(this)">
-                <div class="avatar">ر</div>
-                <h3>الأستاذة ريم</h3>
-                <span>معلمة اللغة الإنجليزية</span>
+            <article class="teacher">
+                <div class="avatar">م</div>
+                <h3>الأستاذ محمد حمدان الحسيني</h3>
+                <span>أستاذ العلوم</span>
+                <div class="dua">اللهم افتح له أبواب الفهم والاكتشاف والنجاح</div>
             </article>
 
             <!-- المعلم 6 -->
-            <article class="teacher" onclick="toggleCard(this)">
-                <div class="avatar">ف</div>
-                <h3>الأستاذ فهد</h3>
-                <span>معلم المهارات الرقمية</span>
+            <article class="teacher">
+                <div class="avatar">م</div>
+                <h3>الأستاذ ممدوح الرشيدي</h3>
+                <span>أستاذ الرياضيات</span>
+                <div class="dua">اللهم اجعل الأرقام في طريقنا باباً للنور والتفوق</div>
+            </article>
+
+            <!-- المعلم 7 -->
+            <article class="teacher">
+                <div class="avatar">خ</div>
+                <h3>الأستاذ خالد الزهراني</h3>
+                <span>أستاذ الفنية</span>
+                <div class="dua">اللهم أبدع في قلبه وافتح له أبواب الإبداع والذكاء</div>
+            </article>
+
+            <!-- المعلم 8 -->
+            <article class="teacher">
+                <div class="avatar">أ</div>
+                <h3>الأستاذ احمد الحسيني</h3>
+                <span>أستاذ الإنجليزي</span>
+                <div class="dua">اللهم يسر لغات الدنيا في طريقه ووفقه في خطابه</div>
             </article>
         </div>
     </section>
@@ -525,13 +622,35 @@ window.addEventListener("load", () => {
     }
 });
 
-// تفاعل النقر في الموبايل أو الشاشات اللمسية للكروت
-function toggleCard(element) {
-    document.querySelectorAll('.teacher').forEach(card => {
-        if (card !== element) card.classList.remove('active-touch');
+// ============ دعاء يظهر داخل كرت الأستاذ ويختفي تلقائياً ============
+const cards = document.querySelectorAll('.teacher');
+const canHover = window.matchMedia('(hover: hover)').matches;
+let duaTimer;
+
+function showDua(card) {
+    cards.forEach(c => {
+        if (c !== card) c.classList.remove('show-dua');
     });
-    element.classList.toggle('active-touch');
+    card.classList.add('show-dua');
+    clearTimeout(duaTimer);
+    duaTimer = setTimeout(() => card.classList.remove('show-dua'), 5000);
 }
+
+cards.forEach(card => {
+    card.addEventListener('click', () => showDua(card));
+    card.addEventListener('mouseenter', () => { if (canHover) showDua(card); });
+    card.addEventListener('mouseleave', () => { if (canHover) card.classList.remove('show-dua'); });
+});
+
+// إخفاء أي دعاء عند اللمس في مكان آخر أو عند التمرير
+document.addEventListener('touchstart', e => {
+    if (!e.target.closest('.teacher')) {
+        cards.forEach(c => c.classList.remove('show-dua'));
+    }
+});
+window.addEventListener('scroll', () => {
+    cards.forEach(c => c.classList.remove('show-dua'));
+});
 </script>
 </body>
 </html>
