@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي | الأستاذ خالد الزهراني</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        arabic: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts - Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* =========================
+           Light Mode
+        ========================== */
+
+        .light body {
+            background: #f8f9fb;
+        }
+
+        .light .profile-bg {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(
+                    circle at 12% 10%,
+                    rgba(129, 140, 248, 0.1) 0%,
+                    transparent 52%
+                ),
+                radial-gradient(
+                    circle at 88% 8%,
+                    rgba(56, 189, 248, 0.09) 0%,
+                    transparent 52%
+                ),
+                radial-gradient(
+                    circle at 50% 95%,
+                    rgba(45, 212, 191, 0.08) 0%,
+                    transparent 70%
+                ),
+                linear-gradient(
+                    180deg,
+                    #f9fafc 0%,
+                    #f8f9fb 100%
+                );
+        }
+
+        .light .card {
+            background: #ffffff;
+            border: 1px solid rgba(15, 23, 42, 0.05);
+            box-shadow: 0 36px 70px -38px rgba(15, 23, 42, 0.18);
+        }
+
+        /* =========================
+           Dark Mode
+        ========================== */
+
+        .dark body {
+            background: #0a0d1c;
+        }
+
+        .dark .profile-bg {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(
+                    circle at 12% 10%,
+                    rgba(139, 92, 246, 0.16) 0%,
+                    transparent 56%
+                ),
+                radial-gradient(
+                    circle at 88% 8%,
+                    rgba(14, 165, 233, 0.14) 0%,
+                    transparent 56%
+                ),
+                radial-gradient(
+                    circle at 50% 96%,
+                    rgba(16, 185, 129, 0.12) 0%,
+                    transparent 74%
+                ),
+                linear-gradient(
+                    180deg,
+                    #0a0d1c 0%,
+                    #090b19 100%
+                );
+        }
+
+        .dark .card {
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(148, 163, 255, 0.09),
+                    transparent 60%
+                ),
+                linear-gradient(
+                    180deg,
+                    rgba(25, 29, 54, 0.98) 0%,
+                    rgba(17, 21, 42, 0.98) 100%
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 44px 80px -36px rgba(6, 8, 26, 0.8);
+        }
+
+        /* =========================
+           General
+        ========================== */
+
+        .accent-bar {
+            background:
+                linear-gradient(
+                    90deg,
+                    #8b5cf6 0%,
+                    #0ea5e9 50%,
+                    #10b981 100%
+                );
+        }
+
+        .avatar-ring {
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b5cf6 0%,
+                    #0ea5e9 50%,
+                    #10b981 100%
+                );
+        }
+
+        .quote-box {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(139, 92, 246, 0.04) 0%,
+                    rgba(14, 165, 233, 0.03) 50%,
+                    rgba(16, 185, 129, 0.04) 100%
+                );
+
+            border: 1px solid rgba(139, 92, 246, 0.12);
+        }
+
+        .dark .quote-box {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(139, 92, 246, 0.06) 0%,
+                    rgba(14, 165, 233, 0.05) 50%,
+                    rgba(16, 185, 129, 0.06) 100%
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* =========================
+           Social Buttons
+        ========================== */
+
+        .social-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            overflow: hidden;
+            isolation: isolate;
+            border: 1px solid transparent;
+
+            transition:
+                transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.4s ease;
+
+            box-shadow: 0 12px 28px -18px rgba(15, 23, 42, 0.45);
+        }
+
+        .social-btn i {
+            position: relative;
+            z-index: 3;
+
+            transition:
+                transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                color 0.25s ease;
+        }
+
+        .social-btn::before,
+        .social-btn::after {
+            content: "";
+            position: absolute;
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .social-btn::before {
+            inset: 0;
+            z-index: 1;
+
+            background:
+                radial-gradient(
+                    circle at 30% 20%,
+                    rgba(255, 255, 255, 0.24),
+                    transparent 65%
+                );
+
+            mix-blend-mode: screen;
+            opacity: 0;
+            transform: scale(0.9);
+
+            transition:
+                opacity 0.35s ease,
+                transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .social-btn::after {
+            inset: -1px;
+            z-index: 2;
+
+            background:
+                conic-gradient(
+                    from 0deg,
+                    transparent 0 350deg,
+                    rgba(255, 255, 255, 0.18) 360deg
+                );
+
+            opacity: 0;
+            transform: rotate(-100deg) scale(0.8);
+
+            transition:
+                opacity 0.4s ease,
+                transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+            mix-blend-mode: screen;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-btn:hover i {
+            transform: scale(1.18) rotate(-6deg);
+        }
+
+        .social-btn:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .social-btn:hover::after {
+            opacity: 0.8;
+            transform: rotate(6deg) scale(1.02);
+        }
+
+        /* WhatsApp */
+
+        .social-btn.whatsapp {
+            color: #22c55e;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #ffffff 0%,
+                    #f8fffa 100%
+                );
+            border-color: rgba(34, 197, 94, 0.28);
+        }
+
+        .dark .social-btn.whatsapp {
+            color: #22d66f;
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(30, 38, 34, 0.98) 0%,
+                    rgba(17, 25, 22, 0.98) 100%
+                );
+            border-color: rgba(34, 214, 111, 0.36);
+        }
+
+        /* Instagram */
+
+        .social-btn.instagram {
+            color: #ef476f;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #ffffff 0%,
+                    #fff8fa 100%
+                );
+            border-color: rgba(239, 71, 111, 0.26);
+        }
+
+        .dark .social-btn.instagram {
+            color: #f472b6;
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(34, 23, 33, 0.98) 0%,
+                    rgba(23, 17, 25, 0.98) 100%
+                );
+            border-color: rgba(244, 114, 182, 0.36);
+        }
+
+        /* TikTok */
+
+        .social-btn.tiktok {
+            color: #111827;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #ffffff 0%,
+                    #f9f9f9 100%
+                );
+            border-color: rgba(17, 24, 39, 0.18);
+        }
+
+        .dark .social-btn.tiktok {
+            color: #f8fafc;
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(25, 25, 32, 0.98) 0%,
+                    rgba(18, 18, 26, 0.98) 100%
+                );
+            border-color: rgba(248, 250, 252, 0.22);
+        }
+
+        /* Snapchat */
+
+        .social-btn.snapchat {
+            color: #f59e0b;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #ffffff 0%,
+                    #fffaf3 100%
+                );
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .dark .social-btn.snapchat {
+            color: #facc15;
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(33, 27, 19, 0.98) 0%,
+                    rgba(24, 20, 15, 0.98) 100%
+                );
+            border-color: rgba(250, 204, 21, 0.38);
+        }
+
+        /* =====================================================
+           Theme Toggle
+           انیمیشن بسیار نرم و آرام برای ماه / خورشید
+        ====================================================== */
+
+        #themeToggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+
+            transition:
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #themeToggle .theme-icon-wrap {
+            position: relative;
+
+            width: 1.25rem;
+            height: 1.25rem;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #themeIcon {
+            position: absolute;
+            inset: 0;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            /*
+             * حرکت خیلی نرم:
+             * - بدون چرخش 180 درجه
+             * - بدون کوچک شدن شدید
+             * - محو شدن آرام
+             */
+            transition:
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.45s ease;
+
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+        }
+
+        /*
+         * وضعیت موقت هنگام تعویض آیکون
+         */
+        #themeIcon.slow-fade {
+            transform: scale(0.88) rotate(12deg);
+            opacity: 0;
+        }
+
+        #themeToggle:hover {
+            transform: translateY(-2px);
+        }
+
+        #themeToggle:active {
+            transform: translateY(0);
+        }
+
+        /*
+         * اگر کاربر Reduce Motion را فعال کرده باشد،
+         * انیمیشن تقریباً حذف می‌شود.
+         */
+        @media (prefers-reduced-motion: reduce) {
+            #themeIcon {
+                transition:
+                    opacity 0.15s ease;
+                transform: none;
+            }
+
+            #themeIcon.slow-fade {
+                transform: none;
+            }
+
+            #themeToggle {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-slate-800 dark:text-slate-100 transition-colors duration-500 flex flex-col justify-between">
+
+    <div class="profile-bg"></div>
+
+    <!-- Header -->
+    <header class="w-full max-w-4xl mx-auto px-4 sm:px-6 py-5 flex justify-between items-center relative z-10">
+
+        <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl avatar-ring p-0.5 shadow-sm">
+                <div class="w-full h-full rounded-[14px] sm:rounded-[15px] bg-white dark:bg-slate-950 flex items-center justify-center transition-colors duration-500">
+                    <i class="fa-solid fa-graduation-cap text-base sm:text-lg text-slate-900 dark:text-white"></i>
+                </div>
+            </div>
+
+            <span class="font-bold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white transition-colors duration-500">
+                الأستاذ خالد الزهراني
+            </span>
+
+        </div>
+
+        <!-- Theme Toggle -->
+        <button
+            id="themeToggle"
+            class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl card flex items-center justify-center hover:shadow-lg transition-all duration-300"
+            aria-label="تبديل الوضع الليلي والنهاري"
+        >
+            <span class="theme-icon-wrap">
+                <i
+                    id="themeIcon"
+                    class="fa-solid fa-moon text-slate-700 dark:text-slate-200 text-base sm:text-lg"
+                ></i>
+            </span>
+        </button>
+
+    </header>
+
+    <br>
+
+    <!-- Main -->
+    <main class="w-full max-w-3xl mx-auto px-4 sm:px-6 py-2 sm:py-4 relative z-10 my-auto">
+
+        <div class="card rounded-3xl sm:rounded-[2.25rem] p-6 sm:p-10 md:p-12 relative overflow-hidden transition-all duration-500">
+
+            <div class="accent-bar absolute top-0 left-0 right-0 h-1.5"></div>
+
+            <!-- Profile Header -->
+            <div class="flex flex-col md:flex-row items-center gap-7 sm:gap-9 mb-8 sm:mb-10 text-center md:text-right">
+
+                <!-- Avatar -->
+                <div class="relative flex-shrink-0">
+
+                    <div class="avatar-ring absolute inset-0 rounded-full p-0.5">
+                        <div class="w-full h-full rounded-full bg-white dark:bg-slate-950"></div>
+                    </div>
+
+                    <img
+                        src="01.jpg"
+                        alt="صورة المعلم الشخصية"
+                        class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full object-cover m-0.5 shadow-sm border border-slate-200/80 dark:border-slate-700/80"
+                        onerror="this.src='https://placehold.co/200x200/f8fafc/101828?text=%D8%A3%D8%AD%D9%85%D8%AF'"
+                    >
+
+                    <div class="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 bg-emerald-400 w-4 h-4 sm:w-5 sm:h-5 rounded-full border-[3px] sm:border-4 border-white dark:border-slate-950 shadow-sm"></div>
+
+                </div>
+
+                <!-- Info -->
+                <div class="flex-1 space-y-3">
+
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-wide leading-tight text-slate-900 dark:text-white">
+                        الأستاذ خالد الزهراني
+                    </h1>
+
+                    <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-[2.15] max-w-xl mx-auto md:mx-0">
+                        رسالتي في الحياة هي بناء الأجيال، وغرس القيم النبيلة، وصنع أثرٍ خالد في عقول وأرواح المتعلمين بكلِ حبٍّ وإخلاص وإتقان.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Quote -->
+            <div class="quote-box mb-8 sm:mb-10 relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 transition-all duration-500">
+
+                <div class="absolute -left-5 -bottom-10 text-slate-900/5 dark:text-white/5 text-8xl sm:text-9xl font-serif select-none pointer-events-none leading-none">
+                    ❝
+                </div>
+
+                <div class="relative z-10 flex flex-col items-center md:items-start text-center md:text-right gap-4 sm:gap-5">
+
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 dark:bg-slate-950/90 text-slate-900 dark:text-white text-xs font-semibold shadow-sm border border-slate-200/80 dark:border-slate-700/80 backdrop-blur-sm">
+
+                        <i class="fa-solid fa-heart text-rose-500"></i>
+
+                        <span>
+                            في جلال المعلم ورفعة شأنه
+                        </span>
+
+                    </div>
+
+                    <p class="text-base sm:text-lg md:text-xl font-bold leading-[2.25] sm:leading-[2.3] text-slate-800 dark:text-slate-100 tracking-wide">
+                        «مُعَلِّمُ الخَيْرِ يَسْقِي العُقُولَ رَوِيّاً، كَمَا يَسْقِي المَطَرُ الأَرْضَ الطَّيِّبَةَ فَتُثْمِرُ أَنْوَاعَ الحِكْمَةِ وَالمَعْرِفَةِ؛ يَزْرَعُ الكَلِمَةَ الطَّيِّبَةَ فَتُثْمِرُ وَعْياً، وَيَغْرِسُ الخُلُقَ الرَّفِيعَ فَيَزْهُو مَجْداً.»
+                    </p>
+
+                    <div class="self-start md:self-end mt-1 text-[11px] sm:text-xs font-medium text-slate-500 dark:text-slate-400 tracking-widest">
+                        ✨ دررٌ في فضلِ المعلم
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Social -->
+            <div class="space-y-5 sm:space-y-6">
+
+                <h3 class="text-center font-semibold text-[11px] sm:text-xs tracking-[0.32em] text-slate-500 dark:text-slate-400 uppercase">
+                    عالمي الرقمي
+                </h3>
+
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+
+                    <a
+                        href="https://whatsapp.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-btn whatsapp w-12 h-12 sm:w-14 sm:h-14"
+                        aria-label="واتساب"
+                    >
+                        <i class="fa-brands fa-whatsapp text-xl sm:text-2xl"></i>
+                    </a>
+
+                    <a
+                        href="https://instagram.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-btn instagram w-12 h-12 sm:w-14 sm:h-14"
+                        aria-label="انستغرام"
+                    >
+                        <i class="fa-brands fa-instagram text-xl sm:text-2xl"></i>
+                    </a>
+
+                    <a
+                        href="https://tiktok.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-btn tiktok w-12 h-12 sm:w-14 sm:h-14"
+                        aria-label="تيك توك"
+                    >
+                        <i class="fa-brands fa-tiktok text-xl sm:text-2xl"></i>
+                    </a>
+
+                    <a
+                        href="https://snapchat.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-btn snapchat w-12 h-12 sm:w-14 sm:h-14"
+                        aria-label="سناب شات"
+                    >
+                        <i class="fa-brands fa-snapchat text-xl sm:text-2xl"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="w-full py-3 sm:py-4 relative z-10"></footer>
+
+    <script>
+
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        /*
+         * تغییر تم با انیمیشن بسیار نرم
+         */
+        const applyTheme = (theme, animate = false) => {
+
+            if (animate) {
+
+                // شروع محو شدن آرام آیکون
+                themeIcon.classList.add('slow-fade');
+
+                /*
+                 * کمی صبر می‌کنیم تا آیکون تقریباً محو شود،
+                 * سپس ماه/خورشید را عوض می‌کنیم.
+                 */
+                setTimeout(() => {
+
+                    updateClassesAndIcon(theme);
+
+                    /*
+                     * با requestAnimationFrame باعث می‌شویم
+                     * برگشت آیکون به حالت عادی نرم و طبیعی باشد.
+                     */
+                    requestAnimationFrame(() => {
+                        themeIcon.classList.remove('slow-fade');
+                    });
+
+                }, 220);
+
+            } else {
+
+                updateClassesAndIcon(theme);
+
+            }
+        };
+
+
+        /*
+         * تغییر کلاس‌های Dark/Light
+         * و تغییر آیکون ماه / خورشید
+         */
+        const updateClassesAndIcon = (theme) => {
+
+            if (theme === 'light') {
+
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+
+                themeIcon.className =
+                    'fa-solid fa-sun text-slate-700 text-base sm:text-lg';
+
+            } else {
+
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+
+                themeIcon.className =
+                    'fa-solid fa-moon text-slate-200 text-base sm:text-lg';
+
+            }
+
+        };
+
+
+        /*
+         * دریافت تم ذخیره‌شده
+         */
+        const savedTheme = localStorage.getItem('theme');
+
+        applyTheme(
+            savedTheme === 'light' ? 'light' : 'dark',
+            false
+        );
+
+
+        /*
+         * کلیک روی دکمه تغییر تم
+         */
+        themeToggle.addEventListener('click', () => {
+
+            const isDark =
+                htmlElement.classList.contains('dark');
+
+            const newTheme =
+                isDark ? 'light' : 'dark';
+
+            applyTheme(newTheme, true);
+
+            localStorage.setItem(
+                'theme',
+                newTheme
+            );
+
+        });
+
+    </script>
+
+</body>
+</html>
